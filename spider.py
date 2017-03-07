@@ -2,9 +2,7 @@ import re
 import urllib
 import os
 import shutil
-#1111
 
-#test again!!!!!
 def get_html(url):
 	page = urllib.urlopen(url)
 	html_content = page.read()
@@ -15,8 +13,6 @@ def spide_content(html_content, obj_type='jpg'):
 		'(?:https?|ftp)://'+
 		'[\w.\-_/]+.' + obj_type
 					)
-
-
 	match_result = pattern.findall(html_content)
 	print 'len: '+str(len(match_result))
 	return match_result

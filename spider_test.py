@@ -3,14 +3,9 @@ import urllib
 import os
 import shutil
 
-
-
-#along side with test again!!!
 def get_jpg(html):
     pattern = re.compile(
       '(?:https?|ftp)'+ '://[\w\.-_/]+.jpg'
-
-
     )
     match = pattern.findall(html)
     print 'len: ' + str(len(match))
