@@ -13,6 +13,8 @@ def spide_content(html_content, obj_type='jpg'):
 		'(?:https?|ftp)://'+
 		'[\w.\-_/]+.' + obj_type
 					)
+
+
 	match_result = pattern.findall(html_content)
 	print 'len: '+str(len(match_result))
 	return match_result
