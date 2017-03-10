@@ -8,17 +8,45 @@ def torrent_parse(torrent_filename):
     len_torrent_buf=len(torrent_buf)
     idx=0
     while 1:
-        print "char:%s idx:%s"%(torrent_buf[idx],str(idx))
-        if( torrent_buf[idx].isdigit() and \
-            torrent_buf[idx+1]==':'):#string
+        if( (torrent_buf[idx].isdigit()   and \
+             torrent_buf[idx+1]==':')     or \
+
+            (torrent_buf[idx].isdigit()   and \
+             torrent_buf[idx+1].isdigit() and \
+             torrent_buf[idx+2].isdigit() and \
+             torrent_buf[idx+3]==':' )    or \
+
+            (torrent_buf[idx].isdigit()   and \
+             torrent_buf[idx+1].isdigit() and \
+             torrent_buf[idx+2].isdigit() and \
+             torrent_buf[idx+3].isdigit() and \
+             torrent_buf[idx+4] == ':')
+
+            (torrent_buf[idx].isdigit()   and \
+             torrent_buf[idx+1].isdigit() and \
+             torrent_buf[idx+2].isdigit() and \
+             torrent_buf[idx+3].isdigit() and \
+             torrent_buf[idx+4].isdigit() and \
+             torrent_buf[idx+5] == ':')
+            ):
+            #string
             str_content = torrent_buf[idx+2:idx+2+int(torrent_buf[idx])]
             print("string:%d,content:%s"%(int(torrent_buf[idx]),str_content))
             idx=idx+int(torrent_buf[idx])+2
 
         elif(torrent_buf[idx]=='i' and \
              torrent_buf[idx+1]==':'):
-            print "integer"
 
+
+
+            print "integer"
+            idx+=2
+            _start=idx
+            while torrent_buf[idx]!='e':
+                idx+=1
+            _end=idx
+            print torrent_buf[_start:_end]
+            idx+=1
 
         elif(torrent_buf[idx]=='d' and \
              torrent_buf[idx+1].isdigit() and \
@@ -57,6 +85,7 @@ def torrent_parse(torrent_filename):
         if idx>=len_torrent_buf-2:
             print "end of torrent"
             break
+    fp.close()
 def main():
     if len(sys.argv) != 2:
         usage()
@@ -64,4 +93,4 @@ def main():
     torrent_parse(sys.argv[1])
 if __name__ == "__main__":
     #main()
-    torrent_parse("/home/qqq/Desktop/test.t")
+    torrent_parse("/home/qqq/Desktop/test.torrent")
