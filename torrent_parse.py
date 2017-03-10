@@ -8,27 +8,10 @@ def torrent_parse(torrent_filename):
     len_torrent_buf=len(torrent_buf)
     idx=0
     while 1:
-        if( (torrent_buf[idx].isdigit()   and \
-             torrent_buf[idx+1]==':')     or \
-
-            (torrent_buf[idx].isdigit()   and \
-             torrent_buf[idx+1].isdigit() and \
-             torrent_buf[idx+2].isdigit() and \
-             torrent_buf[idx+3]==':' )    or \
-
-            (torrent_buf[idx].isdigit()   and \
-             torrent_buf[idx+1].isdigit() and \
-             torrent_buf[idx+2].isdigit() and \
-             torrent_buf[idx+3].isdigit() and \
-             torrent_buf[idx+4] == ':')
-
-            (torrent_buf[idx].isdigit()   and \
-             torrent_buf[idx+1].isdigit() and \
-             torrent_buf[idx+2].isdigit() and \
-             torrent_buf[idx+3].isdigit() and \
-             torrent_buf[idx+4].isdigit() and \
-             torrent_buf[idx+5] == ':')
-            ):
+        if(torrent_buf[idx].isdigit()):
+            res=get_header_len(torrent_buf[idx:idx+11])
+            print str(res[0])
+            print str(res[1])
             #string
             str_content = torrent_buf[idx+2:idx+2+int(torrent_buf[idx])]
             print("string:%d,content:%s"%(int(torrent_buf[idx]),str_content))
@@ -86,6 +69,27 @@ def torrent_parse(torrent_filename):
             print "end of torrent"
             break
     fp.close()
+
+def get_header_len(arg):
+    if(arg[0].isdigit()):
+        ret1='s'
+        _end = arg.find(':')
+        ret2 = arg[0:_end]
+
+    elif(arg[0]=='i'):
+        ret1='i'
+        _end = arg.find('e')
+        ret2=arg[1:_end]
+
+    elif(arg[0]=='d'):
+        ret1='d'
+
+    elif(arg[0]=='l'):
+        ret1='l'
+        ret2=arg.find(':')
+
+    return (ret1,ret2)
+
 def main():
     if len(sys.argv) != 2:
         usage()
@@ -93,4 +97,4 @@ def main():
     torrent_parse(sys.argv[1])
 if __name__ == "__main__":
     #main()
-    torrent_parse("/home/qqq/Desktop/test.torrent")
+    torrent_parse("/home/qqq/Desktop/test.t")
