@@ -88,4 +88,4 @@ def main():
     torrent_parse(sys.argv[1])
 if __name__ == "__main__":
     #main()
-    torrent_parse("/home/qqq/Desktop/test.t")
+    torrent_parse("/home/qqq/Desktop/test.torrent")
