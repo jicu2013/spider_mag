@@ -13,7 +13,7 @@ def exp1():
     os.makedirs(down_dir)
 
     params = {
-        'save_path': '//home//qqq//download',
+        'save_path': '//home//www//download',
         'storage_mode': lt.storage_mode_t(2),
         'paused': False,
         'auto_managed': True,

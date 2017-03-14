@@ -16,7 +16,7 @@ def spide_content(html_content, obj_type='jpg'):
 	print 'len: '+str(len(match_result))
 	return match_result
 def get_remote_obj(obj_url,obj_type='jpg'):
-	down_dir='//home//qqq//download'
+	down_dir='//home//www//download'
 	if os.path.exists(down_dir):
 		shutil.rmtree(down_dir)
 	os.makedirs(down_dir)
